@@ -18,6 +18,18 @@ class StdDraw
     [x - r, y - r, x + r, y + r]
    end
 
+   def self.set_xscale(xmin, xmax)
+   end
+
+   def self.set_yscale(ymin, ymax)
+   end
+
+   def self.set_pen_radius(radius)
+   end
+
+   def self.point(x, y)
+   end
+
 
   #def point(x,y)
   #  xs = scale_X x
