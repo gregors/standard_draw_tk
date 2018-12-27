@@ -18,14 +18,15 @@ class StdDraw
   DEFAULT_PEN_RADIUS = 0.002
   @@pen_radius = DEFAULT_PEN_RADIUS
 
-  @@color = 'blue'
+  @@color = 'black'
+  @@bg_color = 'white'
 
   @@root = TkRoot.new
-  @@root.title = 'boom'
+  @@root.title = 'Standard Draw'
   @@canvas = TkCanvas.new(@@root) do
     height @@height
     width @@width
-    bg 'white'
+    bg @@bg_color
   end
   @@canvas.pack
 
@@ -80,8 +81,6 @@ class StdDraw
        b = self.box(x1, y1, scaled_pen_radius/2)
        TkcOval.new(@@canvas, b, outline: @@color, fill: @@color)
      end
-
-     self.draw
    end
 
   def self.pixel(x, y)
@@ -91,8 +90,6 @@ class StdDraw
     y1 = scaleY(y)
     y1 = y1.round
     TkcRectangle.new(@@canvas, [x1, y1, x1 + 1, y1 + 1], outline: @@color, fill: @@color)
-
-    self.draw
   end
 
   def self.scaleX(x)
@@ -103,11 +100,8 @@ class StdDraw
     @@height * (@@ymax - y) / (@@ymax - @@ymin)
   end
 
-  def self.draw
-    puts 'draw'
-  end
 
-  def self.final
+  def self.pause
     @@thread.join
   end
 end
