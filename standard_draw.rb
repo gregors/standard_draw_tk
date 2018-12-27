@@ -87,6 +87,22 @@ class StdDraw
     @@height * (@@ymax - y) / (@@ymax - @@ymin)
   end
 
+  def self.factor_x(w)
+    w * @@width  / (@@xmax - @@xmin).abs
+  end
+
+  def self.factor_y(h)
+    h * @@height / (@@ymax - @@ymin).abs
+  end
+
+  def self.user_x(x)
+    @@xmin + x * (@@xmax - @@xmin) / @@width
+  end
+
+  def self.user_y(y)
+    @@ymax - y * (@@ymax - @@ymin) / @@height
+  end
+
 
   def self.pause
     @@thread.join
