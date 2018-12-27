@@ -1,22 +1,16 @@
 require 'tk'
 
 class StdDraw
-    BORDER = 0.00
-    DEFAULT_SIZE = 512
-    @@width  = DEFAULT_SIZE
-    @@height = DEFAULT_SIZE
+  BORDER = 0.00
+  @@width  = DEFAULT_SIZE = 512
+  @@height = DEFAULT_SIZE
 
-    DEFAULT_XMIN = 0.0
-    DEFAULT_XMAX = 1.0
-    DEFAULT_YMIN = 0.0
-    DEFAULT_YMAX = 1.0
-    @@xmin = DEFAULT_XMIN
-    @@ymin = DEFAULT_YMIN
-    @@xmax = DEFAULT_XMAX
-    @@ymax = DEFAULT_YMAX
+  @@xmin = DEFAULT_XMIN = 0.0
+  @@ymin = DEFAULT_YMIN = 1.0
+  @@xmax = DEFAULT_XMAX = 0.0
+  @@ymax = DEFAULT_YMAX = 1.0
 
-  DEFAULT_PEN_RADIUS = 0.002
-  @@pen_radius = DEFAULT_PEN_RADIUS
+  @@pen_radius = DEFAULT_PEN_RADIUS = 0.002
 
   @@color = 'black'
   @@bg_color = 'white'
@@ -30,9 +24,7 @@ class StdDraw
   end
   @@canvas.pack
 
-  @@flag = false
   @@thread = Thread.new do
-    @@flag = true
     Tk.mainloop
   end
 
@@ -41,7 +33,6 @@ class StdDraw
   end
 
    def self.set_xscale(min, max)
-     sleep 1 until @@flag
      size = max - min
      throw 'the min and max are the same' if size == 0.0
      @@xmin = min - BORDER * size
@@ -49,7 +40,6 @@ class StdDraw
    end
 
    def self.set_yscale(min, max)
-     sleep 1 until @@flag
      size = max - min
      throw 'the min and max are the same' if size == 0.0
      @@ymin = min - BORDER * size
@@ -66,8 +56,6 @@ class StdDraw
    end
 
    def self.point(x, y)
-     sleep 1 until @@flag
-
      xs = scaleX(x)
      ys = scaleY(y)
      r = @@pen_radius
@@ -84,7 +72,6 @@ class StdDraw
    end
 
   def self.pixel(x, y)
-    sleep 1 until @@flag
     x1 = scaleX(x)
     x1 = x1.round
     y1 = scaleY(y)
