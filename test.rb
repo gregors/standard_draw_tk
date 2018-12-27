@@ -3,7 +3,7 @@ require_relative './standard_draw'
 n = 50
 StdDraw.set_xscale(0,n)
 StdDraw.set_yscale(0,n*n)
-StdDraw.pen_radius = 0.02
+StdDraw.pen_radius = 0.01
 
 1.upto(n) do |i|
   StdDraw.point(i, i)
