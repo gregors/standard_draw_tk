@@ -1,4 +1,4 @@
-require_relative './standard_draw'
+require 'standard_draw_tk'
 
 n = 50
 StdDraw.set_xscale(0,n)
