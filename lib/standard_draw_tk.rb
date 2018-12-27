@@ -1,3 +1,4 @@
+require 'standard_draw_tk/version'
 require 'tk'
 
 class StdDraw
@@ -6,8 +7,8 @@ class StdDraw
   @@height = DEFAULT_SIZE
 
   @@xmin = DEFAULT_XMIN = 0.0
-  @@ymin = DEFAULT_YMIN = 1.0
-  @@xmax = DEFAULT_XMAX = 0.0
+  @@ymin = DEFAULT_YMIN = 0.0
+  @@xmax = DEFAULT_XMAX = 1.0
   @@ymax = DEFAULT_YMAX = 1.0
 
   @@pen_radius = DEFAULT_PEN_RADIUS = 0.002
@@ -26,6 +27,11 @@ class StdDraw
 
   @@thread = Thread.new do
     Tk.mainloop
+  end
+
+  def self.init
+   set_xscale(DEFAULT_XMIN, DEFAULT_XMAX)
+   set_yscale(DEFAULT_YMIN, DEFAULT_YMAX)
   end
 
   def self.box(x, y, r)
@@ -56,8 +62,9 @@ class StdDraw
    end
 
    def self.point(x, y)
-     xs = scaleX(x)
-     ys = scaleY(y)
+     xs = scale_x(x)
+     ys = scale_y(y)
+
      r = @@pen_radius
      scaled_pen_radius = r * DEFAULT_SIZE
 
@@ -67,23 +74,31 @@ class StdDraw
        x1 = xs - scaled_pen_radius/2
        y1 = ys - scaled_pen_radius/2
        b = self.box(x1, y1, scaled_pen_radius/2)
+
        TkcOval.new(@@canvas, b, outline: @@color, fill: @@color)
      end
    end
 
   def self.pixel(x, y)
-    x1 = scaleX(x)
+    puts 'pixel'
+  #  puts x
+    x1 = scale_x(x)
+  #  puts x1
     x1 = x1.round
-    y1 = scaleY(y)
+  #  puts x1
+
+    y1 = scale_y(y)
+  #  puts y1
     y1 = y1.round
+  #  puts y1
     TkcRectangle.new(@@canvas, [x1, y1, x1 + 1, y1 + 1], outline: @@color, fill: @@color)
   end
 
-  def self.scaleX(x)
+  def self.scale_x(x)
     @@width  * (x - @@xmin) / (@@xmax - @@xmin)
   end
 
-  def self.scaleY(y)
+  def self.scale_y(y)
     @@height * (@@ymax - y) / (@@ymax - @@ymin)
   end
 
@@ -103,6 +118,10 @@ class StdDraw
     @@ymax - y * (@@ymax - @@ymin) / @@height
   end
 
+  #def circle( x, y, r, **kwargs):
+  #  TkcOval.new(@canvas, 9)
+  #  return self.create_oval(x-r, y-r, x+r, y+r, **kwargs)
+  #.Canvas.create_circle = _create_circle
 
   def self.pause
     @@thread.join

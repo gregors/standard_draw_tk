@@ -6,8 +6,37 @@ I really would like to call this code in standard ruby. So I'm attempting to kee
 
 ## Installation
 
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'standard_draw_tk'
+```
+
+And then execute:
+
+    $ bundle
+
+Or install it yourself as:
+
+    $ gem install standard_draw_tk
 Ruby doesn't contain TK by default anymore. And installing the TK gem requires a bit of manual installation depending on the system. I followed this [blog post](https://saveriomiroddi.github.io/Installing-ruby-tk-bindings-gem-on-ubuntu/) to get it working on linux.
 
 ## Usage
 
 This is a WIP!!!
+## Development
+
+After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+* [] point
+* [] pixel
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/gregors/standard_draw_tk.
+
+## License
+
+The gem is available as open source under the terms of the [GNU General Public License, version 3 (GPLv3)](http://www.gnu.org/copyleft/gpl.html).
