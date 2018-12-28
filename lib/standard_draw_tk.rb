@@ -47,6 +47,14 @@ class StdDraw
      @@color
    end
 
+   def self.line(x0, y0, x1, y1)
+     x0 = coords.scale_x(x0)
+     y0 = coords.scale_y(y0)
+     x1 = coords.scale_x(x1)
+     y1 = coords.scale_y(y1)
+     TkcLine.new(@@canvas, x0, y0, x1, y1, fill: color)
+   end
+
    def self.rectangle(x, y, half_width, half_height)
      draw_rectangle(x, y, half_width, half_height)
    end

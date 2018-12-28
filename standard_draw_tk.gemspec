@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{TK version of Princeton's Standard Draw library}
   spec.description   = %q{TK versoin of Princeton's Standard Draw library}
   spec.homepage      = 'https://github.com/gregors/standard_draw_tk'
-  spec.license       = 'GPLV3'
+  spec.license       = 'GPLv3'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
