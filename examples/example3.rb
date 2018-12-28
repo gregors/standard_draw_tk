@@ -3,11 +3,13 @@ require 'standard_draw_tk'
 n = 50
 a = []
 
-0.upto(n) do |i|
+0.upto(50) do |i|
   a[i] = rand
 end
 
-0.upto(n) do |i|
+a.sort!
+
+0.upto(50) do |i|
   x = 1.0 * i / n
   y = a[i] / 2.0
   rw = 0.5 / n
