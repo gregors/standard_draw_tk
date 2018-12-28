@@ -59,6 +59,14 @@ class StdDraw
     draw_circle(x, y, radius, outline: color)
   end
 
+  def self.ellipse(x, y, w, h)
+    draw_ellipse(x, y, w, h, outline: color)
+  end
+
+  def self.filled_ellipse(x, y, w, h)
+    draw_ellipse(x, y, w, h, fill: color)
+  end
+
   def self.filled_circle(x, y, radius)
     draw_circle(x, y, radius, fill: color)
   end
@@ -95,6 +103,24 @@ class StdDraw
   end
 
   private
+
+  def self.draw_ellipse(x, y, w, h, outline: nil, fill: nil)
+    throw 'semi_major_axis must be nonnegative' if w < 0
+    throw 'semi_minor_axis must be nonnegative' if h < 0
+
+    xs = coords.scale_x(x)
+    ys = coords.scale_y(y)
+    ws = coords.factor_x(2*w)
+    hs = coords.factor_y(2*h)
+    if ws <= 1 && hs <= 1
+      pixel(x, y)
+    else
+      x1 = xs - ws/2
+      y1 = ys - hs/2
+      b = [x1, y1, x1 + ws, y1 + hs]
+      TkcOval.new(@@canvas, b, outline: outline, fill: fill)
+    end
+  end
 
   def self.draw_circle(x, y, radius, outline: nil, fill: nil)
     throw 'radius must be nonnegative' if radius < 0

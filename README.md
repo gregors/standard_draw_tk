@@ -40,8 +40,8 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 * [ ] filled_polygon
 * [x] circle
 * [x] filled_circle
-* [ ] ellipse
-* [ ] filled_ellipse
+* [x] ellipse
+* [x] filled_ellipse
 * [ ] arc
 * [x] square
 * [x] filled_square
