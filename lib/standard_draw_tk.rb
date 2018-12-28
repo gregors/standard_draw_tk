@@ -39,55 +39,62 @@ class StdDraw
     @@pen_radius = radius
   end
 
-   def self.pen_color=(color)
-     @@color = color
-   end
+  def self.pen_color=(color)
+    @@color = color
+  end
 
-   def self.color
-     @@color
-   end
+  def self.color
+    @@color
+  end
 
-   def self.line(x0, y0, x1, y1)
-     x0 = coords.scale_x(x0)
-     y0 = coords.scale_y(y0)
-     x1 = coords.scale_x(x1)
-     y1 = coords.scale_y(y1)
-     TkcLine.new(@@canvas, x0, y0, x1, y1, fill: color)
-   end
+  def self.line(x0, y0, x1, y1)
+    x0 = coords.scale_x(x0)
+    y0 = coords.scale_y(y0)
+    x1 = coords.scale_x(x1)
+    y1 = coords.scale_y(y1)
+    TkcLine.new(@@canvas, x0, y0, x1, y1, fill: color)
+  end
 
-   def self.rectangle(x, y, half_width, half_height)
-     draw_rectangle(x, y, half_width, half_height, outline: color)
-   end
+  def self.circle(x, y, radius)
+    draw_circle(x, y, radius, outline: color)
+  end
 
-   def self.filled_rectangle(x, y, half_width, half_height)
-     draw_rectangle(x, y, half_width, half_height, fill: color)
-   end
+  def self.filled_circle(x, y, radius)
+    draw_circle(x, y, radius, fill: color)
+  end
 
-   def self.square(x, y, half_length)
-     draw_rectangle(x, y, half_length, half_length, outline: color)
-   end
+  def self.rectangle(x, y, half_width, half_height)
+    draw_rectangle(x, y, half_width, half_height, outline: color)
+  end
 
-   def self.filled_square(x, y, half_length)
-     draw_rectangle(x, y, half_length, half_length, fill: color)
-   end
+  def self.filled_rectangle(x, y, half_width, half_height)
+    draw_rectangle(x, y, half_width, half_height, fill: color)
+  end
 
-   def self.point(x, y)
-     xs = coords.scale_x(x)
-     ys = coords.scale_y(y)
+  def self.square(x, y, half_length)
+    draw_rectangle(x, y, half_length, half_length, outline: color)
+  end
 
-     r = @@pen_radius
-     scaled_pen_radius = r * StandardDrawTk::Coordinates::DEFAULT_SIZE
+  def self.filled_square(x, y, half_length)
+    draw_rectangle(x, y, half_length, half_length, fill: color)
+  end
 
-     if scaled_pen_radius <= 1
-       pixel(x, y)
-     else
-       x1 = xs - scaled_pen_radius/2
-       y1 = ys - scaled_pen_radius/2
-       b = coords.box(x1, y1, scaled_pen_radius/2)
+  def self.point(x, y)
+    xs = coords.scale_x(x)
+    ys = coords.scale_y(y)
 
-       TkcOval.new(@@canvas, b, outline: color, fill: color)
-     end
-   end
+    r = @@pen_radius
+    scaled_pen_radius = r * StandardDrawTk::Coordinates::DEFAULT_SIZE
+
+    if scaled_pen_radius <= 1
+      pixel(x, y)
+    else
+      x1 = xs - scaled_pen_radius/2
+      y1 = ys - scaled_pen_radius/2
+      b = coords.box(x1, y1, scaled_pen_radius/2)
+      TkcOval.new(@@canvas, b, outline: color, fill: color)
+    end
+  end
 
   def self.pixel(x, y)
     puts 'pixel'
@@ -101,6 +108,19 @@ class StdDraw
   end
 
   private
+
+  def self.draw_circle(x, y, radius, outline: nil, fill: nil)
+    throw 'radius must be nonnegative' if radius < 0
+    xs = coords.scale_x(x)
+    ys = coords.scale_y(y)
+    scaled_pen_radius = radius * StandardDrawTk::Coordinates::DEFAULT_SIZE
+    if scaled_pen_radius <= 1
+      pixel(x, y)
+    else
+      b = coords.box(xs, ys, scaled_pen_radius/2)
+      TkcOval.new(@@canvas, b, outline: outline, fill: fill)
+    end
+  end
 
   def self.draw_rectangle(x, y, half_width, half_height, outline: nil, fill: nil)
     throw 'half width must be nonnegative' if half_width < 0
