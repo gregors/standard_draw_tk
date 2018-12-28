@@ -43,6 +43,19 @@ class StdDraw
      @@color = color
    end
 
+   def self.color
+     @@color
+   end
+
+   def self.rectangle(x, y, half_width, half_height)
+     draw_rectangle(x, y, half_width, half_height)
+   end
+
+
+   def self.filled_rectangle(x, y, half_width, half_height)
+     draw_rectangle(x, y, half_width, half_height, fill: color)
+   end
+
    def self.point(x, y)
      xs = coords.scale_x(x)
      ys = coords.scale_y(y)
@@ -57,7 +70,7 @@ class StdDraw
        y1 = ys - scaled_pen_radius/2
        b = coords.box(x1, y1, scaled_pen_radius/2)
 
-       TkcOval.new(@@canvas, b, outline: @@color, fill: @@color)
+       TkcOval.new(@@canvas, b, outline: color, fill: color)
      end
    end
 
@@ -65,10 +78,30 @@ class StdDraw
     puts 'pixel'
     x1 = coords.scale_x(x).round
     y1 = coords.scale_y(y).round
-    TkcRectangle.new(@@canvas, [x1, y1, x1 + 1, y1 + 1], outline: @@color, fill: @@color)
+    TkcRectangle.new(@@canvas, [x1, y1, x1 + 1, y1 + 1], outline: color, fill: color)
   end
 
   def self.pause
     @@thread.join
+  end
+
+  private
+
+  def self.draw_rectangle(x, y, half_width, half_height, fill: nil)
+    throw 'half width must be nonnegative' if half_width < 0
+    throw 'half height must be nonnegative' if half_height < 0
+
+    ws = coords.factor_x(2*half_width)
+    hs = coords.factor_y(2*half_height)
+
+    if (ws <= 1 && hs <= 1)
+      pixel(x, y)
+    else
+      xs = coords.scale_x(x)
+      ys = coords.scale_y(y)
+      x = xs - ws/2
+      y = ys - hs/2
+      TkcRectangle.new(@@canvas, x, y, x + ws, y + hs, outline: color, fill: fill)
+    end
   end
 end

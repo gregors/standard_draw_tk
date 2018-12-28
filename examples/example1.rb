@@ -1,8 +1,8 @@
 require 'standard_draw_tk'
 
-n = 50
-StdDraw.set_xscale(0,n)
-StdDraw.set_yscale(0,n*n)
+n = 100
+puts StdDraw.set_xscale(0,n)
+puts StdDraw.set_yscale(0,n*n)
 StdDraw.pen_radius = 0.01
 
 1.upto(n) do |i|
