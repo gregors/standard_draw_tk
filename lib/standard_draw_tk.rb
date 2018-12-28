@@ -101,7 +101,7 @@ class StdDraw
       ys = coords.scale_y(y)
       x = xs - ws/2
       y = ys - hs/2
-      TkcRectangle.new(@@canvas, x, y, x + ws, y + hs, outline: color, fill: fill)
+      TkcRectangle.new(@@canvas, x, y, x + (ws-1), y + (hs-1), width: 0, fill: fill)
     end
   end
 end
