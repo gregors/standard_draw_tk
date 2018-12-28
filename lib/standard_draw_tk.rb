@@ -56,12 +56,19 @@ class StdDraw
    end
 
    def self.rectangle(x, y, half_width, half_height)
-     draw_rectangle(x, y, half_width, half_height)
+     draw_rectangle(x, y, half_width, half_height, outline: color)
    end
-
 
    def self.filled_rectangle(x, y, half_width, half_height)
      draw_rectangle(x, y, half_width, half_height, fill: color)
+   end
+
+   def self.square(x, y, half_length)
+     draw_rectangle(x, y, half_length, half_length, outline: color)
+   end
+
+   def self.filled_square(x, y, half_length)
+     draw_rectangle(x, y, half_length, half_length, fill: color)
    end
 
    def self.point(x, y)
@@ -95,7 +102,7 @@ class StdDraw
 
   private
 
-  def self.draw_rectangle(x, y, half_width, half_height, fill: nil)
+  def self.draw_rectangle(x, y, half_width, half_height, outline: nil, fill: nil)
     throw 'half width must be nonnegative' if half_width < 0
     throw 'half height must be nonnegative' if half_height < 0
 
@@ -109,7 +116,7 @@ class StdDraw
       ys = coords.scale_y(y)
       x = xs - ws/2
       y = ys - hs/2
-      TkcRectangle.new(@@canvas, x, y, x + (ws-1), y + (hs-1), width: 0, fill: fill)
+      TkcRectangle.new(@@canvas, x, y, x + (ws-1), y + (hs-1), outline: outline, fill: fill)
     end
   end
 end
