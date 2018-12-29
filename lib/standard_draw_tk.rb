@@ -109,7 +109,7 @@ class StdDraw
   end
 
   def self.point(x, y)
-    draw_circle(x, y, @@pen_radius, outline: color, fill: color)
+    draw_circle(x, y, @@pen_radius/2, outline: color, fill: color)
   end
 
   def self.pixel(x, y)
@@ -170,7 +170,7 @@ class StdDraw
     if scaled_pen_radius <= 1
       pixel(x, y)
     else
-      b = coords.box(xs, ys, scaled_pen_radius/2)
+      b = coords.box(xs, ys, scaled_pen_radius)
       TkcOval.new(@@canvas, b, outline: outline, fill: fill)
     end
   end
