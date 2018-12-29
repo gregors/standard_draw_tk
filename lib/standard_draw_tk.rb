@@ -113,7 +113,6 @@ class StdDraw
   end
 
   def self.pixel(x, y)
-    puts 'pixel'
     x1 = coords.scale_x(x).round
     y1 = coords.scale_y(y).round
     TkcRectangle.new(@@canvas, [x1, y1, x1 + 1, y1 + 1], outline: color, fill: color)
