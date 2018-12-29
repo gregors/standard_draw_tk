@@ -123,7 +123,27 @@ class StdDraw
     @@thread.join
   end
 
+  def self.polygon(x, y)
+    draw_polygon(x, y, outline: color)
+  end
+
+  def self.filled_polygon(x, y)
+    draw_polygon(x, y, fill: color)
+  end
+
   private
+
+  def self.draw_polygon(x, y, fill: '', outline: nil)
+    throw 'x-coordinate array is null' if x.nil?
+    throw 'y-coordinate array is null' if y.nil?
+    throw 'arrays must be of the same length' if x.size != y.size
+    return if x.empty?
+    x = x.map{|i| coords.scale_x(i)}
+    y = y.map{|i| coords.scale_y(i)}
+    points = x.zip(y).flatten
+    scaled_pen_radius = @@pen_radius * StandardDrawTk::Coordinates::DEFAULT_SIZE
+    TkcPolygon.new(@@canvas, *points, width: scaled_pen_radius, fill: fill, outline: outline)
+  end
 
   def self.draw_ellipse(x, y, w, h, outline: nil, fill: nil)
     throw 'semi_major_axis must be nonnegative' if w < 0

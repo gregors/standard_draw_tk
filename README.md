@@ -36,8 +36,8 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 * [x] pixel
 * [x] rectangle
 * [x] filled_rectangle
-* [ ] polygon
-* [ ] filled_polygon
+* [x] polygon
+* [x] filled_polygon
 * [x] circle
 * [x] filled_circle
 * [x] ellipse
