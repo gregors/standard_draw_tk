@@ -1,8 +1,11 @@
 # Standard Draw TK
 
-I was going through the [Algorithms 4th edition](https://algs4.cs.princeton.edu/home/) and wanted to write the algorithms in ruby instead of the default java. The book uses the [Princeton Standard Libraries](https://introcs.cs.princeton.edu/java/stdlib/) to help clarify the code. I've added a simple [jruby wrapper gem](https://rubygems.org/gems/princeton_standard_libraries) that lets you call the original java code in Jruby.
+I was going through the [Algorithms 4th edition](https://algs4.cs.princeton.edu/home/) and wanted to write the algorithms in ruby instead of the default java. The book uses the [Princeton Standard Libraries](https://introcs.cs.princeton.edu/java/stdlib/) to help clarify the code.
 
-I really would like to call this code in standard ruby. So I'm attempting to keep the original interface while recreating the logic using the [ruby TK gem](https://github.com/ruby/tk).
+I really would like to call this code in standard ruby. So I'm attempting to keep the original interface while recreating the logic using the [ruby TK gem](https://github.com/ruby/tk). The graphics drawing portion works but the library is not yet fully complete.
+
+If you need something not yet ported consider using the [jruby wrapper gem](https://rubygems.org/gems/princeton_standard_libraries) that lets you call the original java code in Jruby.
+
 
 ## Installation
 
