@@ -55,6 +55,27 @@ class StdDraw
     TkcLine.new(@@canvas, x0, y0, x1, y1, fill: color)
   end
 
+  def self.arc(x, y, radius, angle1, angle2)
+    throw 'arc radius must be nonnegative' if radius < 0
+    while angle2 < angle1
+      angle2 += 360
+    end
+    xs = coords.scale_x(x)
+    ys = coords.scale_y(y)
+    ws = coords.factor_x(2*radius)
+    hs = coords.factor_y(2*radius)
+    if ws <= 1 && hs <= 1
+      pixel(x, y)
+    else
+      x1 = xs - ws/2
+      y1 = ys - hs/2
+      x2 = x1 + ws
+      y2 = y1 + hs
+      scaled_pen_radius = @@pen_radius * StandardDrawTk::Coordinates::DEFAULT_SIZE
+      TkcArc.new(@@canvas, x1, y1, x2, y2, style: :arc, start: angle1, extent: angle2 - angle1, fill: color, width: scaled_pen_radius, outline: color)
+    end
+  end
+
   def self.circle(x, y, radius)
     draw_circle(x, y, radius, outline: color)
   end

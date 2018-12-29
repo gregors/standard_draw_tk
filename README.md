@@ -42,7 +42,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 * [x] filled_circle
 * [x] ellipse
 * [x] filled_ellipse
-* [ ] arc
+* [x] arc
 * [x] square
 * [x] filled_square
 
