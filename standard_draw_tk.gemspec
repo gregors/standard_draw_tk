@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Gregory Ostermayr']
   spec.email         = ['<gregory.ostermayr@gmail.com>']
 
-  spec.summary       = %q{TK version of Princeton's Standard Draw library}
-  spec.description   = %q{TK versoin of Princeton's Standard Draw library}
+  spec.summary       = %q{Ruby TK version of Princeton's Standard Draw library}
+  spec.description   = %q{Ruby TK version of Princeton's Standard Draw library}
   spec.homepage      = 'https://github.com/gregors/standard_draw_tk'
   spec.license       = 'GPLv3'
 
