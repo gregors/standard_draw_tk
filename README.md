@@ -1,10 +1,33 @@
 # Standard Draw TK
 
-I was going through the [Algorithms 4th edition](https://algs4.cs.princeton.edu/home/) and wanted to write the algorithms in ruby instead of the default java. The book uses the [Princeton Standard Libraries](https://introcs.cs.princeton.edu/java/stdlib/) to help clarify the code.
+The StdDraw class provides a basic capability for creating drawings with your programs. It uses a simple graphics model that allows you to create drawings consisting of points, lines, squares, circles, and other geometric shapes in a window on your computer.
 
-I really would like to call this code in standard ruby. So I'm attempting to keep the original interface while recreating the logic using the [ruby TK gem](https://github.com/ruby/tk). The graphics drawing portion works but the library is not yet fully complete.
+I was going through the excellent [Algorithms 4th edition](https://algs4.cs.princeton.edu/home/) text  and *really* wanted to use ruby instead of the default java. The book makes use of the [Princeton Standard Libraries](https://introcs.cs.princeton.edu/java/stdlib/) to help clarify the code and display useful figures.
+
+The original graphics code uses Java Swing/AWT which works fine with Jruby but not so much with standard ruby. So I started wondering how bad it would be to rewrite it in something MRI friendly. I'm attempting to keep the original interface as much as possible while recreating the logic using the [ruby TK gem](https://github.com/ruby/tk). The graphics drawing portion works but the library is not yet fully complete. See [things to implement](https://github.com/gregors/standard_draw_tk/blob/master/README.md#things-to-implement)
 
 If you need something not yet ported consider using the [jruby wrapper gem](https://rubygems.org/gems/princeton_standard_libraries) that lets you call the original java code in Jruby.
+
+Most of the docs taken/modified from the [original source](https://introcs.cs.princeton.edu/java/stdlib/javadoc/StdDraw.html)
+
+Type the following short program into your editor:
+
+    require 'standard_draw_tk'
+
+    StdDraw.pen_radius = 0.05
+    StdDraw.pen_color = :blue
+    StdDraw.point(0.5, 0.5)
+    StdDraw.pen_color = :magenta
+    StdDraw.line(0.2, 0.2, 0.8, 0.2)
+    StdDraw.pause
+
+run it:
+
+    ruby examples/example4.rb
+
+![image of example4](https://raw.githubusercontent.com/gregors/standard_draw_tk/master/examples/image_example4.png)
+
+
 
 
 ## Installation
@@ -26,15 +49,66 @@ Ruby doesn't contain TK by default anymore. And installing the TK gem requires a
 
 ## Usage
 
-The drawing of geometric shapes has been implemented though there are probably some small tweaks that need to be added, e.g. the line ends of arcs.
+
+### Note
+
+You will need to add `StdDraw.pause` to the end of your programs as shown in the examples. I may change or alias this in the future or maybe find a work around. This deviates from the original Standar Draw lib
+
+### Points and lines
+
+You can draw points and line segments with the following methods:
+
+    StdDraw.point(x, y)
+    StdDraw.line(x1, y1, x2, y2)
+
+The x- and y-coordinates must be in the drawing area (between 0 and 1 and by default) or the points and lines will not be visible.
+
+### Squares, circles, rectangles, and ellipses
+
+You can draw squares, circles, rectangles, and ellipses using the following methods:
+
+    StdDraw.circle(x, y, radius)
+    StdDraw.ellipse(x, y, semiMajorAxis, semiMinorAxis)
+    StdDraw.square(x, y, radius)
+    StdDraw.rectangle(x, y, halfWidth, halfHeight)
+
+All of these methods take as arguments the location and size of the shape. The location is always specified by the x- and y-coordinates of its center. The size of a circle is specified by its radius and the size of an ellipse is specified by the lengths of its semi-major and semi-minor axes. The size of a square or rectangle is specified by its half-width or half-height. The convention for drawing squares and rectangles is parallel to those for drawing circles and ellipses, but may be unexpected to the uninitiated.
+
+The methods above trace outlines of the given shapes. The following methods draw filled versions:
+
+    StdDraw.filledCircle(x, y, radius)
+    StdDraw.filledEllipse(x, y, semiMajorAxis, semiMinorAxis)
+    StdDraw.filledSquare(x, y, radius)
+    StdDraw.filledRectangle(x, y, halfWidth, halfHeight)
+
+### Circular arcs
+
+You can draw circular arcs with the following method:
+
+    StdDraw.arc(x, y, radius, angle1, angle2)
+
+The arc is from the circle centered at (x, y) of the specified radius. The arc extends from angle1 to angle2. By convention, the angles are polar (counterclockwise angle from the x-axis) and represented in degrees. For example, StdDraw.arc(0.0, 0.0, 1.0, 0, 90) draws the arc of the unit circle from 3 o'clock (0 degrees) to 12 o'clock (90 degrees).
+
+### Polygons
+
+You can draw polygons with the following methods:
+
+    StdDraw.polygon([] x, [] y)
+    StdDraw.filledPolygon([] x, [] y)
+
+### Examples
+
+see the [examples directory](https://github.com/gregors/standard_draw_tk/tree/master/examples)
+
 
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
 ## Things to implement:
+
+### line ends bug
+* [ ] ends of arcs and line aren't rounded.
 
 ### Drawing geometric shapes
 * [x] line
