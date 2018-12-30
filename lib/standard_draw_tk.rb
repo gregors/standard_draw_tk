@@ -52,7 +52,7 @@ class StdDraw
     y0 = coords.scale_y(y0)
     x1 = coords.scale_x(x1)
     y1 = coords.scale_y(y1)
-    TkcLine.new(@@canvas, x0, y0, x1, y1, fill: color)
+    TkcLine.new(@@canvas, x0, y0, x1, y1, width: scaled_pen_radius, fill: color)
   end
 
   def self.arc(x, y, radius, angle1, angle2)
@@ -71,7 +71,6 @@ class StdDraw
       y1 = ys - hs/2
       x2 = x1 + ws
       y2 = y1 + hs
-      scaled_pen_radius = @@pen_radius * StandardDrawTk::Coordinates::DEFAULT_SIZE
       TkcArc.new(@@canvas, x1, y1, x2, y2, style: :arc, start: angle1, extent: angle2 - angle1, fill: color, width: scaled_pen_radius, outline: color)
     end
   end
@@ -132,6 +131,10 @@ class StdDraw
 
   private
 
+  def self.scaled_pen_radius
+    @@pen_radius * StandardDrawTk::Coordinates::DEFAULT_SIZE
+  end
+
   def self.draw_polygon(x, y, fill: '', outline: nil)
     throw 'x-coordinate array is null' if x.nil?
     throw 'y-coordinate array is null' if y.nil?
@@ -140,7 +143,6 @@ class StdDraw
     x = x.map{|i| coords.scale_x(i)}
     y = y.map{|i| coords.scale_y(i)}
     points = x.zip(y).flatten
-    scaled_pen_radius = @@pen_radius * StandardDrawTk::Coordinates::DEFAULT_SIZE
     TkcPolygon.new(@@canvas, *points, width: scaled_pen_radius, fill: fill, outline: outline)
   end
 
@@ -166,11 +168,11 @@ class StdDraw
     throw 'radius must be nonnegative' if radius < 0
     xs = coords.scale_x(x)
     ys = coords.scale_y(y)
-    scaled_pen_radius = radius * StandardDrawTk::Coordinates::DEFAULT_SIZE
+    scaled_radius = radius * StandardDrawTk::Coordinates::DEFAULT_SIZE
     if scaled_pen_radius <= 1
       pixel(x, y)
     else
-      b = coords.box(xs, ys, scaled_pen_radius)
+      b = coords.box(xs, ys, scaled_radius)
       TkcOval.new(@@canvas, b, outline: outline, fill: fill)
     end
   end
