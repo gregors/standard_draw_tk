@@ -15,9 +15,9 @@ Type the following short program into your editor:
     require 'standard_draw_tk'
 
     StdDraw.pen_radius = 0.05
-    StdDraw.pen_color = :blue
+    StdDraw.pen_color = StdDraw::BLUE
     StdDraw.point(0.5, 0.5)
-    StdDraw.pen_color = :magenta
+    StdDraw.pen_color = StdDraw::MAGENTA
     StdDraw.line(0.2, 0.2, 0.8, 0.2)
     StdDraw.pause
 
@@ -95,6 +95,16 @@ You can draw polygons with the following methods:
 
     StdDraw.polygon([] x, [] y)
     StdDraw.filledPolygon([] x, [] y)
+
+### Colors
+
+You can use the color constants or any [predefined TK Color](https://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm) as a string or symbol as well as hex values
+
+    # are all the same
+    StdDraw.pen_color = StdDraw::BLUE
+    StdDraw.pen_color = :blue
+    StdDraw.pen_color = 'blue'
+    StdDraw.pen_color = '#0000FF'
 
 ### Examples
 

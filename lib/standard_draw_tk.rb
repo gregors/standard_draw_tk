@@ -3,12 +3,30 @@ require 'tk'
 require_relative './coordinates'
 
 class StdDraw
+  BLACK = :black
+  BLUE = :blue
+  CYAN = :cyan
+  DARK_GRAY = :DarkGray
+  GRAY = :gray
+  GREEN = :green
+  LIGHT_GRAY = :LightGray
+  MAGENTA = :magenta
+  ORANGE = :orange
+  PINK = :pink
+  RED = :red
+  WHITE = :white
+  YELLOW = :yellow
+  BOOK_BLUE = '#095AA6'
+  BOOK_LIGHT_BLUE = '#67C6F3'
+  BOOK_RED = '#96231F'
+  PRINCETON_ORANGE = '#F58025'
+
   @@pen_radius = DEFAULT_PEN_RADIUS = 0.002
 
   @@coords = StandardDrawTk::Coordinates.new
 
-  @@color = 'black'
-  @@bg_color = 'white'
+  @@color = BLACK
+  @@bg_color = WHITE
 
   @@root = TkRoot.new
   @@root.title = 'Standard Draw'
