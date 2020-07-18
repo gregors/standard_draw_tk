@@ -9,4 +9,4 @@ StdDraw.pen_color = StdDraw::BOOK_RED
 StdDraw.point(0.3, 0.3)
 StdDraw.pen_color = StdDraw::DARK_GRAY
 StdDraw.point(0.7, 0.7)
-StdDraw.pause
+StdDraw.run

@@ -16,4 +16,4 @@ a.sort!
   rh = a[i] / 2.0
   StdDraw.filled_rectangle(x, y, rw, rh)
 end
-StdDraw.pause
+StdDraw.run

@@ -36,7 +36,13 @@ class StdDraw
     bg @@bg_color
   end
   @@canvas.pack
-  @@thread = Thread.new do
+
+  def self.run
+    Tk.mainloop
+  end
+
+  # should make this real
+  def self.pause
     Tk.mainloop
   end
 
@@ -133,10 +139,6 @@ class StdDraw
     x1 = coords.scale_x(x).round
     y1 = coords.scale_y(y).round
     TkcRectangle.new(@@canvas, [x1, y1, x1 + 1, y1 + 1], outline: color, fill: color)
-  end
-
-  def self.pause
-    @@thread.join
   end
 
   def self.polygon(x, y)

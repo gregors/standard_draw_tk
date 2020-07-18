@@ -5,4 +5,4 @@ StdDraw.pen_color = StdDraw::BLUE
 StdDraw.point(0.5, 0.5)
 StdDraw.pen_color = StdDraw::MAGENTA
 StdDraw.line(0.2, 0.2, 0.8, 0.2)
-StdDraw.pause
+StdDraw.run

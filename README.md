@@ -19,7 +19,7 @@ Type the following short program into your editor:
     StdDraw.point(0.5, 0.5)
     StdDraw.pen_color = StdDraw::MAGENTA
     StdDraw.line(0.2, 0.2, 0.8, 0.2)
-    StdDraw.pause
+    StdDraw.run
 
 run it:
 
@@ -43,16 +43,27 @@ And then execute:
     $ bundle
 
 Or install it yourself as:
-
     $ gem install standard_draw_tk
+
+### Installing TK on Linux
+
 Ruby doesn't contain TK by default anymore. And installing the TK gem requires a bit of manual installation depending on the system. I followed this [blog post](https://saveriomiroddi.github.io/Installing-ruby-tk-bindings-gem-on-ubuntu/) to get it working on linux.
+
+### Installing TK on OSX
+
+* download and install https://www.xquartz.org/ - since TK needs an X11 server
+* `brew install tcl-tk`
+* `echo 'export PATH="/usr/local/opt/tcl-tk/bin:$PATH"' >> ~/.zshrc`
+* `wish` to test it installed correctly
+* `rvm install 2.6.5 --enable-shared --enable-pthread --with-tk --with-tcl`
+* `gem install tk` should work
 
 ## Usage
 
 
 ### Note
 
-You will need to add `StdDraw.pause` to the end of your programs as shown in the examples. I may change or alias this in the future or maybe find a work around. This deviates from the original Standar Draw lib
+You will need to add `StdDraw.run` to the end of your programs as shown in the examples. I may change or alias this in the future or maybe find a work around. This deviates from the original Standar Draw lib
 
 ### Points and lines
 

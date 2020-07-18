@@ -7,4 +7,4 @@ StdDraw.filled_polygon(x, y)
 x = [ 0.3, 0.4, 0.5, 0.4 ]
 y = [ 0.4, 0.5, 0.4, 0.3 ]
 StdDraw.polygon(x, y)
-StdDraw.pause
+StdDraw.run
